@@ -18,6 +18,7 @@ public class App {
 
     public static void main( String[] args ) {
         Map<String, LogEvent> mapLogEvents = new HashMap<>();
+        ConnectDatabase conDB = new ConnectDatabase();
 
         try {
             File myObj = new File(System.getProperty("user.dir")+"/logfile.txt");
@@ -47,11 +48,12 @@ public class App {
             int affectedRows;
 
             for (LogEvent event: listLogEvents) {
-                affectedRows = ConnectDatabase.insertLogEvent(event);
+                affectedRows = conDB.insertLogEvent(event);
                 if (affectedRows < 1) {
                     System.out.println("No rows affected.\n");
                 }
             }
+            conDB.stop();
 
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
