@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
-import java.util.Formatter;
 
 public class ConnectDatabase {
     private static Connection con = null;
 //    private static Formatter stringFmt = new Formatter(new StringBuilder());
-    private static String insertQry = "INSERT INTO log_event " +
+    private static final String insertQry = "INSERT INTO log_event " +
             "(id, timestamp_start, timestamp_finish, duration, host, type) " +
             "values (%s)";
 
