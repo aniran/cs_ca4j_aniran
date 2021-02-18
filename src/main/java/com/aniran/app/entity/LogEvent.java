@@ -40,18 +40,6 @@ public class LogEvent {
         this.alert = false;
     }
 
-    public String getStringSQLinsertValues(){
-        String evalHost = this.host == null ? "NULL" : "'" + this.host + "'" ;
-        String evalType = this.type == null ? "NULL" : "'" + this.type + "'" ;
-
-        return "'"+ id +"', " +
-                timestampStart.toString() + ", " +
-                timestampFinish.toString() + ", " +
-                duration.toString() + ", " +
-                evalHost + ", " +
-                evalType;
-    }
-
     public Boolean isAlert(){
         return this.alert;
     }
@@ -65,14 +53,12 @@ public class LogEvent {
                 this.timestampFinish = timestamp;
                 break;
         }
+
+        // If we have timestamps for start and finish we can update duration and alert
         if (this.timestampStart != null && this.timestampFinish != null){
             this.duration = this.timestampFinish - this.timestampStart;
             this.alert = duration > ALERT_THRESHOLD;
         }
-    }
-
-    public LogEvent(String id, EventState eventState, long timestampStart){
-        this(id, eventState, timestampStart, null, null);
     }
 
     public String getId() {
@@ -81,14 +67,6 @@ public class LogEvent {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getTimestampStart() {
-        return timestampStart;
-    }
-
-    public Long getTimestampFinish() {
-        return timestampFinish;
     }
 
     public Long getDuration() {

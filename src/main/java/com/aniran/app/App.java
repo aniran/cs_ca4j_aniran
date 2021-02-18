@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-//import org.apache.logging.log4j.Logger;
-//import org.apache.logging.log4j.LogManager;
 import com.aniran.app.dao.LogEventDao;
 import com.aniran.app.entity.LogEvent;
 import com.aniran.app.entity.EventState;
@@ -31,6 +29,7 @@ public class App {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 JSONObject obj = new JSONObject(data);
+
                 String id = obj.getString("id");
                 EventState eventState = EventState.valueOf(obj.getString("state"));
                 long timestamp = obj.getLong("timestamp");
@@ -41,6 +40,7 @@ public class App {
                     LogEvent logEvent = mapLogEvents.get(id);
                     logEvent.updateTimestamp(eventState, timestamp);
 
+                    // If logEvent.duration is available it means we can persist and remove from mapLogEvents
                     if (logEvent.getDuration() != null){
                         logEventDao.saveLogEvent(logEvent);
                         mapLogEvents.remove(id);
