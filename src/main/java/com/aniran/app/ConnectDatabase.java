@@ -17,7 +17,7 @@ public class ConnectDatabase {
 
     public ConnectDatabase() {
         try {
-            String propFileName = System.getProperty("user.dir")+"/hsql.server.properties";
+            String propFileName = System.getProperty("user.dir")+"/server.properties";
             InputStream inputStream = new FileInputStream(propFileName);
             Properties prop = new Properties();
 
