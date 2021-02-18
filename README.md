@@ -13,6 +13,8 @@ Log file processing
 
 >mvn clean package
 
+The generated log-parser-1.0-jar-with-dependencies.jar file waives the need of installing lib dependencies and configuring classpath.  
+
 ### Running
 
 Windows

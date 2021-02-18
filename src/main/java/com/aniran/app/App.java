@@ -10,7 +10,7 @@ import java.util.*;
 import org.json.JSONObject;
 
 /**
- * Hello world!
+ * Main Application
  *
  */
 public class App {
@@ -42,9 +42,7 @@ public class App {
             }
 
             myReader.close();
-//            List<LogEvent> listLogEvents = mapLogEvents.values().stream().collect(Collectors.toList());
             List<LogEvent> listLogEvents = new ArrayList<>(mapLogEvents.values());
-
             int affectedRows;
 
             for (LogEvent event: listLogEvents) {
