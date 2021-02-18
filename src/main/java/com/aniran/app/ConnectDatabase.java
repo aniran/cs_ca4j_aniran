@@ -2,6 +2,7 @@ package com.aniran.app;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.Formatter;
 
@@ -42,6 +43,8 @@ public class ConnectDatabase {
             Statement statement = ConnectDatabase.con.createStatement();
             String qryInsert = String.format(insertQry, logEvent.getStringSQLinsertValues());
             affectedRows = statement.executeUpdate(qryInsert);
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.out.println("Event " + logEvent.getId() + " already exists in DB.");
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
