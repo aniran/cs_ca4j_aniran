@@ -21,10 +21,23 @@ public class App {
         HSQLDB conDB = new HSQLDB();
         LogEventDao logEventDao = new LogEventDao();
         Map<String, LogEvent> mapLogEvents = new HashMap<>();
+        File logFile = null;
+
+        if (args.length > 0 && args[1] != null) {
+            logFile = new File(args[1]);
+
+            if (! logFile.exists()){
+                logFile = new File(System.getProperty("user.dir") + args[1]);
+            }
+        }
+        if (logFile == null || ! logFile.exists()){
+            logFile = new File(System.getProperty("user.dir")+"/logfile.txt");
+        }
 
         try {
-            File myObj = new File(System.getProperty("user.dir")+"/logfile.txt");
-            Scanner myReader = new Scanner(myObj);
+            Scanner myReader = new Scanner(logFile);
+
+            System.out.println("Reading " + logFile.toString());
 
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();

@@ -5,6 +5,9 @@
 *.log
 *.txt
 
+# Reports
+*.html
+
 # BlueJ files
 *.ctxt
 
