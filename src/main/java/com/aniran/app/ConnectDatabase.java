@@ -4,12 +4,9 @@ import org.hsqldb.Server;
 import org.hsqldb.persist.HsqlProperties;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.*;
-import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 
 public class ConnectDatabase {
     private Connection con;
