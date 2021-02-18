@@ -1,4 +1,4 @@
-# Multi-threaded file processing in Java
+# Log file processing in Java
 Log file processing 
 
 ## Dependencies

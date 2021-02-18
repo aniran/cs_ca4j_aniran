@@ -1,5 +1,8 @@
 package com.aniran.app;
 
+import org.hsqldb.Server;
+import org.hsqldb.persist.HsqlProperties;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -14,6 +17,18 @@ public class ConnectDatabase {
 
     static {
         try {
+            // Starting HSQLDB instance
+            HsqlProperties dbProperties = new HsqlProperties();
+            dbProperties.setProperty("server.database.0","file:/opt/db/accounts");
+            dbProperties.setProperty("server.dbname.0","an_alias");
+            // set up the rest of properties
+
+            // alternative to the above is
+            Server server = new Server();
+            server.setProperties(dbProperties);
+            server.setLogWriter(null); // can use custom writer
+            server.setErrWriter(null); // can use custom writer
+            server.start();
             //Registering the HSQLDB JDBC driver
             Class.forName("org.hsqldb.jdbc.JDBCDriver");
             //Creating the connection with HSQLDB
