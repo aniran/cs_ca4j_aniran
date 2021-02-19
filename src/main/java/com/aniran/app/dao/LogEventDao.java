@@ -29,4 +29,10 @@ public class LogEventDao {
             return session.createQuery("from LogEvent", LogEvent.class).list();
         }
     }
+
+    public LogEvent getLogEvent(String id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.getReference(LogEvent.class, id);
+        }
+    }
 }
