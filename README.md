@@ -11,14 +11,14 @@ Log file processing
 
 ### Building
 
->mvn clean package
+```bash
+mvn clean package
+```
 
 The generated log-parser-1.0-jar-with-dependencies.jar file waives the need of installing lib dependencies and configuring classpath.  
 
 ### Running
 
-Windows
-> run.bat
-
-Linux
-> run.sh
+```bash
+java -jar log-parser-1.0-jar-with-dependencies.jar logfile.txt
+```

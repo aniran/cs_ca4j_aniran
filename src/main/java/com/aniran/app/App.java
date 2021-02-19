@@ -23,11 +23,11 @@ public class App {
         Map<String, LogEvent> mapLogEvents = new HashMap<>();
         File logFile = null;
 
-        if (args.length > 0 && args[1] != null) {
-            logFile = new File(args[1]);
+        if (args.length > 0 && args[0] != null) {
+            logFile = new File(args[0]);
 
             if (! logFile.exists()){
-                logFile = new File(System.getProperty("user.dir") + args[1]);
+                logFile = new File(System.getProperty("user.dir") + args[0]);
             }
         }
         if (logFile == null || ! logFile.exists()){
