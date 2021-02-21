@@ -1,6 +1,6 @@
-package com.aniran.app.util;
+package com.aniran.app.db;
 
-import com.aniran.app.entity.LogEvent;
+import com.aniran.app.entity.RegisteredEvent;
 
 import java.util.Properties;
 
@@ -15,10 +15,9 @@ public class HibernateUtil {
 
     public static SessionFactory getSessionFactory() {
         try {
-            Configuration configuration = new Configuration();
+            Properties settings = new Properties();
 
             // Hibernate settings equivalent to hibernate.cfg.xml's properties
-            Properties settings = new Properties();
             settings.put(Environment.DRIVER, "org.hsqldb.jdbc.JDBCDriver");
             settings.put(Environment.URL, "jdbc:hsqldb:hsql://localhost:9001/log_events");
             settings.put(Environment.USER, "SA");
@@ -28,8 +27,10 @@ public class HibernateUtil {
             settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
             settings.put(Environment.HBM2DDL_AUTO, "create");
 
+            Configuration configuration = new Configuration();
+
             configuration.setProperties(settings);
-            configuration.addAnnotatedClass(LogEvent.class);
+            configuration.addAnnotatedClass(RegisteredEvent.class);
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();

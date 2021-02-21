@@ -1,19 +1,19 @@
 package com.aniran.app.dao;
 
-import com.aniran.app.entity.LogEvent;
-import com.aniran.app.util.HibernateUtil;
+import com.aniran.app.entity.RegisteredEvent;
+import com.aniran.app.db.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class LogEventDao {
-    public void saveLogEvent(LogEvent logEvent) {
+public class RegisteredEventDao {
+    public void saveLogEvent(RegisteredEvent registeredEvent) {
         Transaction transaction = null;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.save(logEvent);
+            session.save(registeredEvent);
             transaction.commit();
         }
         catch (Exception e) {
@@ -24,15 +24,15 @@ public class LogEventDao {
         }
     }
 
-    public List<LogEvent> getLogEvents() {
+    public List<RegisteredEvent> getLogEvents() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from LogEvent", LogEvent.class).list();
+            return session.createQuery("from LogEvent", RegisteredEvent.class).list();
         }
     }
 
-    public LogEvent getLogEvent(String id) {
+    public RegisteredEvent getLogEvent(String id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.getReference(LogEvent.class, id);
+            return session.getReference(RegisteredEvent.class, id);
         }
     }
 }
