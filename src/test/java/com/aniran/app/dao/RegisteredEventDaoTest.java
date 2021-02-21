@@ -1,6 +1,6 @@
 package com.aniran.app.dao;
 
-import com.aniran.app.controller.RegisteredEventController;
+import com.aniran.app.RegisteredEventFactory;
 import com.aniran.app.entity.RegisteredEvent;
 import com.aniran.app.db.DBServer;
 import junit.framework.TestCase;
@@ -18,7 +18,7 @@ public class RegisteredEventDaoTest extends TestCase {
 
     public void testSaveLogEvent() {
         String id = "abcdefhj";
-        RegisteredEvent registeredEvent = RegisteredEventController.createRegisteredEvent(id, FINISHED, 498820L, "machine-b", null);
+        RegisteredEvent registeredEvent = RegisteredEventFactory.createRegisteredEvent(id, FINISHED, 498820L, "machine-b", null);
 
         registeredEventDao.saveLogEvent(registeredEvent);
         RegisteredEvent expected = registeredEventDao.getLogEvent(id);

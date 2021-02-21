@@ -17,7 +17,6 @@ public class HibernateUtil {
         try {
             Properties settings = new Properties();
 
-            // Hibernate settings equivalent to hibernate.cfg.xml's properties
             settings.put(Environment.DRIVER, "org.hsqldb.jdbc.JDBCDriver");
             settings.put(Environment.URL, "jdbc:hsqldb:hsql://localhost:9001/log_events");
             settings.put(Environment.USER, "SA");

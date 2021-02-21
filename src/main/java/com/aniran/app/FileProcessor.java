@@ -1,6 +1,5 @@
 package com.aniran.app;
 
-import com.aniran.app.controller.RegisteredEventController;
 import com.aniran.app.dao.RegisteredEventDao;
 import com.aniran.app.entity.EventState;
 import com.aniran.app.entity.RegisteredEvent;
@@ -10,7 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class FileProcessing {
+public class FileProcessor {
 
     public static void process(File logFile) {
         RegisteredEventDao registeredEventDao = new RegisteredEventDao();
@@ -31,18 +30,16 @@ public class FileProcessing {
                 String host = obj.has("host") ? obj.getString("host") : null;
                 String type = obj.has("type") ? obj.getString("type") : null;
 
-                //
                 if (mapLogEvents.containsKey(id)) {
                     RegisteredEvent registeredEvent = mapLogEvents.get(id);
-                    RegisteredEventController.updateTimestamp(registeredEvent, eventState, timestamp);
+                    RegisteredEventFactory.updateTimestamp(registeredEvent, eventState, timestamp);
 
-                    // If logEvent.duration is available it means we can persist and remove from mapLogEvents
                     if (registeredEvent.getDuration() != null){
                         registeredEventDao.saveLogEvent(registeredEvent);
                         mapLogEvents.remove(id);
                     }
                 } else {
-                    RegisteredEvent registeredEvent = RegisteredEventController.createRegisteredEvent(id, eventState, timestamp, host, type);
+                    RegisteredEvent registeredEvent = RegisteredEventFactory.createRegisteredEvent(id, eventState, timestamp, host, type);
                     mapLogEvents.put(id, registeredEvent);
                 }
             }

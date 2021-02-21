@@ -21,7 +21,6 @@ public class DBServer {
 
             prop.load(inputStream);
 
-            // Configuring HSQLDB instance with server.properties
             HsqlProperties dbProperties = new HsqlProperties();
 
             for (Object key: prop.keySet()){
