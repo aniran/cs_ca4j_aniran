@@ -32,7 +32,6 @@ public class FileProcessor {
             readLogEntryAndRecord(myReader);
         } catch (FileNotFoundException e) {
             logger.error(e.toString());
-//            e.printStackTrace();
         }
         warnSingleEventsLeft();
     }
