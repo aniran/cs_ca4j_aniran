@@ -5,15 +5,15 @@ import com.aniran.app.entity.EventState;
 import com.aniran.app.entity.LogEvent;
 import com.aniran.app.entity.RegisteredEvent;
 import com.aniran.app.entity.RegisteredEventFactory;
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class FileProcessor {
     private static final Logger logger = LoggerFactory.getLogger(FileProcessor.class);

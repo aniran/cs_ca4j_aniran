@@ -1,6 +1,5 @@
 package com.aniran.app.entity;
 
-import com.aniran.app.FileProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

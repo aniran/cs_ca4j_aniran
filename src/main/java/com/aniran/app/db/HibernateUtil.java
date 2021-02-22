@@ -1,7 +1,6 @@
 package com.aniran.app.db;
 
 import com.aniran.app.entity.RegisteredEvent;
-import com.aniran.app.entity.RegisteredEventFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

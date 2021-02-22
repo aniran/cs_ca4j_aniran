@@ -1,12 +1,10 @@
 package com.aniran.app;
 
-import java.io.File;
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
+import com.aniran.app.db.HibernateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aniran.app.db.HibernateUtil;
+import java.io.File;
 
 /**
  * Main Application
