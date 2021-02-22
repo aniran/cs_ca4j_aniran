@@ -1,6 +1,11 @@
 package com.aniran.app.entity;
 
+import com.aniran.app.FileProcessor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class LogEvent {
+    private static final Logger logger = LoggerFactory.getLogger(LogEvent.class);
 
     private String id;
     private EventState eventState;

@@ -8,8 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class RegisteredEventFactory {
-
-    private static Logger logger = LoggerFactory.getLogger(RegisteredEventFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(RegisteredEventFactory.class);
 
     private RegisteredEventFactory(){}
 

@@ -16,19 +16,19 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class FileProcessor {
-    private Logger logger = LoggerFactory.getLogger(FileProcessor.class);
-    private File logFile;
+    private static final Logger logger = LoggerFactory.getLogger(FileProcessor.class);
+    private File entryFile;
     private RegisteredEventDao registeredEventDao = new RegisteredEventDao();
     private Map<String, LogEvent> mapLogEvents = new HashMap<>();
 
-    public FileProcessor(File logFile){
-        this.logFile = logFile;
+    public FileProcessor(File entryFile){
+        this.entryFile = entryFile;
     }
     
     public void process() {
-        logger.debug("Reading file: " + logFile.toString());
+        logger.debug("Reading file: " + entryFile.toString());
 
-        try (Scanner myReader = new Scanner(logFile)){
+        try (Scanner myReader = new Scanner(entryFile)){
             readLogEntryAndRecord(myReader);
         } catch (FileNotFoundException e) {
             logger.error(e.toString());

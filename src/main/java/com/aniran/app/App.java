@@ -12,6 +12,7 @@ import com.aniran.app.db.HibernateUtil;
  * Main Application
  */
 public class App {
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
 
     public static File evalArgumentLogFile(String[] args) {
         File entryFile = null;
@@ -30,7 +31,6 @@ public class App {
     }
 
     public static void main(String[] args) {
-        Logger logger = LoggerFactory.getLogger(App.class);
         logger.info("App Starting");
         try {
             File logFile = evalArgumentLogFile(args);

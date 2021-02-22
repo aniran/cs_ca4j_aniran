@@ -1,15 +1,19 @@
 package com.aniran.app.db;
 
 import com.aniran.app.entity.RegisteredEvent;
+import com.aniran.app.entity.RegisteredEventFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
 public final class HibernateUtil {
+    private static final Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
 
     private HibernateUtil() {
     }
