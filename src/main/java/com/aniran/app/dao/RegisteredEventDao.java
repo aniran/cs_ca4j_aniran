@@ -1,13 +1,14 @@
 package com.aniran.app.dao;
 
-import com.aniran.app.entity.RegisteredEvent;
 import com.aniran.app.db.HibernateUtil;
+import com.aniran.app.entity.RegisteredEvent;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RegisteredEventDao {
+    private static final Logger logger = LoggerFactory.getLogger(RegisteredEventDao.class);
 
     public void saveLogEvent(RegisteredEvent registeredEvent) {
         Transaction transaction = null;
@@ -21,7 +22,7 @@ public class RegisteredEventDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            logger.error(e.toString());
         }
     }
 }
