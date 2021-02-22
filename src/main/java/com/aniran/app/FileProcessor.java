@@ -9,48 +9,55 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class FileProcessor {
     private static final Logger logger = LoggerFactory.getLogger(FileProcessor.class);
-    private File entryFile;
+    private FileReader fileReader;
     private RegisteredEventDao registeredEventDao = new RegisteredEventDao();
     private Map<String, LogEvent> mapLogEvents = new HashMap<>();
 
-    public FileProcessor(File entryFile){
-        this.entryFile = entryFile;
+    public FileProcessor(File file) {
+        try {
+            this.fileReader = new FileReader(file);
+        } catch (FileNotFoundException e) {
+            logger.error(e.toString());
+        }
     }
     
     public void process() {
-        logger.debug("Reading file: " + entryFile.toString());
+        logger.debug("Reading file: " + fileReader.toString());
 
-        try (Scanner myReader = new Scanner(entryFile)){
+        try (BufferedReader myReader = new BufferedReader(fileReader)){
             readLogEntryAndRecord(myReader);
         } catch (FileNotFoundException e) {
+            logger.error("File " + fileReader.toString() + " not found" + e.toString());
+        } catch (IOException e) {
             logger.error(e.toString());
         }
         warnSingleEventsLeft();
     }
 
-    private void readLogEntryAndRecord(Scanner myReader) {
-        while (myReader.hasNextLine()) {
-            String data = myReader.nextLine();
+    private void readLogEntryAndRecord(BufferedReader  myReader) {
+        String currentLine;
+        try{
+            while ((currentLine=myReader.readLine()) != null) {
+                LogEvent logEvent = createLogEvent(currentLine);
+                String id = logEvent.getId();
 
-            LogEvent logEvent = createLogEvent(data);
-            String id = logEvent.getId();
-
-            if (mapLogEvents.containsKey(id)) {
-                LogEvent firstLogEvent = mapLogEvents.get(id);
-                RegisteredEvent registeredEvent = RegisteredEventFactory.create(firstLogEvent, logEvent);
-                mapLogEvents.remove(id);
-                saveIfExists(registeredEvent);
-            } else {
-                 mapLogEvents.put(id, logEvent);
+                if (mapLogEvents.containsKey(id)) {
+                    LogEvent firstLogEvent = mapLogEvents.get(id);
+                    RegisteredEvent registeredEvent = RegisteredEventFactory.create(firstLogEvent, logEvent);
+                    mapLogEvents.remove(id);
+                    saveIfExists(registeredEvent);
+                } else {
+                     mapLogEvents.put(id, logEvent);
+                }
             }
+        } catch (IOException e) {
+            logger.error(e.toString());
         }
     }
 
