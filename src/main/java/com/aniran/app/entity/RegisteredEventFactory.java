@@ -25,13 +25,13 @@ public final class RegisteredEventFactory {
         long duration = finish - start;
 
         if (duration < 0) {
-            logger.warn("Event " + firstEvent.getId() + " has duration " + duration);
+            logger.warn("WARNING: Event " + firstEvent.getId() + " has NEGATIVE duration: " + duration);
         }
 
         Boolean shouldAlert = (duration > ALERT_THRESHOLD_IN_MS);
 
         if (shouldAlert) {
-            logger.warn("Event " + registeredEventId + " duration is over " + ALERT_THRESHOLD_IN_MS + "ms");
+            logger.warn("WARNING: Event " + registeredEventId + " duration is over " + ALERT_THRESHOLD_IN_MS + "ms");
         }
 
         return new RegisteredEvent(
