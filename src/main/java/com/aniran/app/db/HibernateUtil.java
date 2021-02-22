@@ -48,7 +48,7 @@ public final class HibernateUtil {
 
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.toString());
             }
         }
         return sessionFactory;
