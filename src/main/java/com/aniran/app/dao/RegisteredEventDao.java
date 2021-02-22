@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class RegisteredEventDao {
+
     public void saveLogEvent(RegisteredEvent registeredEvent) {
         Transaction transaction = null;
 
@@ -21,18 +22,6 @@ public class RegisteredEventDao {
                 transaction.rollback();
             }
             e.printStackTrace();
-        }
-    }
-
-    public List<RegisteredEvent> getLogEvents() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from LogEvent", RegisteredEvent.class).list();
-        }
-    }
-
-    public RegisteredEvent getLogEvent(String id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.getReference(RegisteredEvent.class, id);
         }
     }
 }

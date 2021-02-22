@@ -27,7 +27,15 @@ public class RegisteredEvent {
     @Column
     private Boolean alert;
 
-    public RegisteredEvent(){}
+    public RegisteredEvent(String id, Long timestampStart, Long timestampFinish, Long duration, String host, String type, Boolean alert) {
+        this.id = id;
+        this.timestampStart = timestampStart;
+        this.timestampFinish = timestampFinish;
+        this.duration = duration;
+        this.host = host;
+        this.type = type;
+        this.alert = alert;
+    }
 
     public String getId() {
         return id;

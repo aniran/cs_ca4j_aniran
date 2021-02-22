@@ -1,37 +1,44 @@
 package com.aniran.app;
 
 import java.io.File;
+//import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.aniran.app.db.DBServer;
+import com.aniran.app.db.HibernateUtil;
 
 /**
  * Main Application
  */
 public class App {
-//    private static final Logger logger = LogManager.getLogger(App.class);
 
     public static File evalArgumentLogFile(String[] args) {
-        File logFile = null;
+        File entryFile = null;
         if (args.length > 0 && args[0] != null) {
-            logFile = new File(args[0]);
+            entryFile = new File(args[0]);
 
-            if (!logFile.exists()) {
-                logFile = new File(System.getProperty("user.dir") + args[0]);
+            if (!entryFile.exists()) {
+                entryFile = new File(System.getProperty("user.dir") + args[0]);
             }
         }
 
-        if (logFile == null || !logFile.exists()) {
-            logFile = new File(System.getProperty("user.dir") + "/logfile.txt");
+        if (entryFile == null || !entryFile.exists()) {
+            entryFile = new File(System.getProperty("user.dir") + "/logfile.txt");
         }
-        return logFile;
+        return entryFile;
     }
 
     public static void main(String[] args) {
-        DBServer.start();
-
-        File logFile = evalArgumentLogFile(args);
-        FileProcessor.process(logFile);
-
-        DBServer.stop();
+        Logger logger = LoggerFactory.getLogger(App.class);
+        logger.info("App Starting");
+        try {
+            File logFile = evalArgumentLogFile(args);
+            new FileProcessor(logFile).process();
+        } catch (Exception e) {
+            logger.error(e.toString());
+        } finally {
+            HibernateUtil.getSessionFactory().close();
+        }
     }
 }
